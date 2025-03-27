@@ -40,7 +40,8 @@ const Projects: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
+            entry.target.classList.add('opacity-100');
+            entry.target.classList.remove('opacity-0');
             observer.unobserve(entry.target);
           }
         });
@@ -71,7 +72,7 @@ const Projects: React.FC = () => {
     <section id="projects" className="py-20 md:py-32 bg-muted/10">
       <div 
         ref={sectionRef} 
-        className="section-container opacity-0"
+        className="section-container opacity-0 transition-opacity duration-700"
       >
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
@@ -85,7 +86,7 @@ const Projects: React.FC = () => {
             <div
               key={index}
               ref={(el) => (projectRefs.current[index] = el)}
-              className="opacity-0 transition-all duration-500"
+              className="opacity-0 transition-opacity duration-700"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <Card className="h-full glass-card overflow-hidden group hover:shadow-md transition-all duration-300 border-border/50">

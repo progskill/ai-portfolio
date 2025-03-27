@@ -51,7 +51,8 @@ const Skills: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
+            entry.target.classList.add('opacity-100');
+            entry.target.classList.remove('opacity-0');
             observer.unobserve(entry.target);
           }
         });
@@ -82,7 +83,7 @@ const Skills: React.FC = () => {
     <section id="skills" className="py-20 md:py-32">
       <div 
         ref={sectionRef} 
-        className="section-container opacity-0"
+        className="section-container opacity-0 transition-opacity duration-700"
       >
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Skills & Expertise</h2>
@@ -96,7 +97,7 @@ const Skills: React.FC = () => {
             <div
               key={index}
               ref={(el) => (skillRefs.current[index] = el)}
-              className="opacity-0 transition-all duration-500"
+              className="opacity-0 transition-opacity duration-500"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <Card className="h-full hover:shadow-md transition-all duration-300 overflow-hidden group">
