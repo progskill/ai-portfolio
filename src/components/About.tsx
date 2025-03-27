@@ -47,7 +47,8 @@ const About: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
+            entry.target.classList.add('opacity-100');
+            entry.target.classList.remove('opacity-0');
             observer.unobserve(entry.target);
           }
         });
@@ -70,7 +71,7 @@ const About: React.FC = () => {
     <section id="about" className="py-20 md:py-32 bg-muted/10">
       <div 
         ref={sectionRef}
-        className="section-container opacity-0"
+        className="section-container opacity-0 transition-opacity duration-700"
       >
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
@@ -82,7 +83,8 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div 
             ref={bioRef}
-            className="opacity-0 order-2 lg:order-1"
+            className="opacity-0 order-2 lg:order-1 transition-opacity duration-700"
+            style={{ transitionDelay: '200ms' }}
           >
             <h3 className="text-2xl font-bold mb-4">My Story</h3>
             <div className="space-y-4 text-muted-foreground">
@@ -112,7 +114,8 @@ const About: React.FC = () => {
           
           <div 
             ref={timelineRef}
-            className="opacity-0 order-1 lg:order-2"
+            className="opacity-0 order-1 lg:order-2 transition-opacity duration-700"
+            style={{ transitionDelay: '400ms' }}
           >
             <h3 className="text-2xl font-bold mb-6">Professional Journey</h3>
             <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent">

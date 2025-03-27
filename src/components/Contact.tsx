@@ -10,6 +10,8 @@ const Contact: React.FC = () => {
   const { toast } = useToast();
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const leftColumnRef = useRef<HTMLDivElement>(null);
+  const rightColumnRef = useRef<HTMLDivElement>(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -52,7 +54,8 @@ const Contact: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
+            entry.target.classList.add('opacity-100');
+            entry.target.classList.remove('opacity-0');
             observer.unobserve(entry.target);
           }
         });
@@ -60,14 +63,14 @@ const Contact: React.FC = () => {
       { threshold: 0.1 }
     );
     
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (leftColumnRef.current) observer.observe(leftColumnRef.current);
+    if (rightColumnRef.current) observer.observe(rightColumnRef.current);
     
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+      if (leftColumnRef.current) observer.unobserve(leftColumnRef.current);
+      if (rightColumnRef.current) observer.unobserve(rightColumnRef.current);
     };
   }, []);
   
@@ -75,7 +78,7 @@ const Contact: React.FC = () => {
     <section id="contact" className="py-20 md:py-32">
       <div 
         ref={sectionRef}
-        className="section-container opacity-0"
+        className="section-container opacity-0 transition-opacity duration-700"
       >
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
@@ -86,7 +89,11 @@ const Contact: React.FC = () => {
         
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-            <div className="md:col-span-2 space-y-6">
+            <div 
+              ref={leftColumnRef}
+              className="md:col-span-2 space-y-6 opacity-0 transition-opacity duration-700"
+              style={{ transitionDelay: '200ms' }}
+            >
               <div className="flex items-start space-x-4">
                 <div className="bg-primary/10 p-3 rounded-full text-primary">
                   <Mail className="h-6 w-6" />
@@ -123,7 +130,11 @@ const Contact: React.FC = () => {
               </div>
             </div>
             
-            <div className="md:col-span-3">
+            <div 
+              ref={rightColumnRef}
+              className="md:col-span-3 opacity-0 transition-opacity duration-700"
+              style={{ transitionDelay: '400ms' }}
+            >
               <form 
                 ref={formRef}
                 onSubmit={handleSubmit} 
