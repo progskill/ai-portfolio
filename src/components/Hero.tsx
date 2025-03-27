@@ -11,7 +11,8 @@ const Hero: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
+          entry.target.classList.add('opacity-100');
+          entry.target.classList.remove('opacity-0');
           observer.unobserve(entry.target);
         }
       },
@@ -33,7 +34,7 @@ const Hero: React.FC = () => {
     <section id="home" className="min-h-screen flex items-center justify-center pt-16">
       <div 
         ref={heroRef} 
-        className="section-container flex flex-col items-center text-center opacity-0"
+        className="section-container flex flex-col items-center text-center opacity-0 transition-opacity duration-700"
       >
         <div className="mb-4 inline-flex items-center rounded-full border border-border/40 bg-muted/20 px-3 py-1 text-sm backdrop-blur-md">
           <span className="text-muted-foreground">Available for new opportunities</span>

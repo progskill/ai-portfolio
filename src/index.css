@@ -91,11 +91,11 @@
   
   /* Animation Utilities */
   .animated-element {
-    @apply opacity-0;
+    @apply opacity-0 transition-opacity duration-700;
   }
   
   .animated-element.in-view {
-    @apply animate-fade-in;
+    @apply opacity-100;
   }
   
   /* Custom scrollbar */
